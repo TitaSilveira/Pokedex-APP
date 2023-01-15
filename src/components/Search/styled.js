@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const Search = styled.div`
-    height: 80px;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 80px;
+    margin: 20px;
 
     .search-container {
         display: flex;
@@ -24,17 +25,16 @@ export const Search = styled.div`
     .search-container button {
         height: 44px;
         padding: 12px 24px;
+        margin-right: 20px;
         border-radius: 5px;
         border: none;
-        background-color: #38AECC;
+        background-color: #170140;
         color: #F8F0FB;
         cursor: pointer;
     }
 
     button:hover{
-        background-color: #084B83; 
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.1);
-        transform: scale(1.1);
+        transform: scale(1.2);
         border-radius: 5px;
     }
 `;

@@ -11,28 +11,27 @@ const Card = (props) => {
     const like = "❤"
     return(
         <PokedexCard>
+            <div className="card-id">
+                <div>#{pokemon.id}</div>
+            </div>
             <div className="card-img">
                 <img alt={pokemon.name} src={pokemon.sprites.front_default} />
             </div>
             <div className="card-body">
                 <div className="card-top">
                     <h3>{pokemon.name}</h3>
-                    <div className="card-top-id">#{pokemon.id}</div>
                 </div>
-                <div className="card-footer">
+                <div className="card-botton">
                     <div className="card-pokemon-type">
-                        <div>
-                            { 
-                            pokemon.types.map((type, index) => {
+                        {pokemon.types.map((type, index) => {
                             return(
-                                <div key={index} className="card-pokemon-type-text">{type.type.name.toUpperCase()}</div>
-                            )
+                            <div key={index} className="card-pokemon-type-text">{type.type.name}</div>
+                        )
                         })}
                     </div>
                     <button className="card-like" onClick={onLikeHandle}>
                         { like }
                     </button>
-                    </div>
                 </div>
             </div>
         </PokedexCard>

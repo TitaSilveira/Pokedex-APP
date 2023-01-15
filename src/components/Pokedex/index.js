@@ -5,7 +5,7 @@ import Card from '../Card';
 const Pokedex = (props) => {
 
     const{ pokemons, loading } = props;
-    console.log("pokemons:", pokemons)
+
     return(
         <PokedexStyled>
             <div className='pokedex-header'>

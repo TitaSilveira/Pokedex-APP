@@ -8,6 +8,7 @@ export const PokedexStyled = styled.div`
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
+        margin-bottom: 40px;
     }
 
     .pokedex-flex {

@@ -3,21 +3,20 @@ import styled from "styled-components";
 export const PokedexCard = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     padding: 30px;
-    box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
     width: 250px;
     height: 200px;
-    background-color: #170140;
+    background-color: #10012C;
     border-radius: 10px;
 
     :hover{
         background-color: #F7B32B; 
         transform: scale(1.1);
         border-radius: 5px;
-        color: white;
+        color: #0D0221;
     }
 
     .card-img {
@@ -29,6 +28,7 @@ export const PokedexCard = styled.div`
     .card-body{
         display: flex;
         flex-direction: column;
+        align-items: center;
         justify-content: space-between;
         padding: 10px 10px 10px 0px;
         flex: 1;
@@ -44,11 +44,13 @@ export const PokedexCard = styled.div`
         text-transform: capitalize;
     }
 
-    .card-top-id {
-        color: #FEFCFB;
+    .card-id {
+        display: flex;
+        justify-content: end;
+        color: #31008C;
     }
-
-    .card-footer {
+    
+    .card-botton {
         display: flex;
         flex-direction: row;
         align-items: center;
