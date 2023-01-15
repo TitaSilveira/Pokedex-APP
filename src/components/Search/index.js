@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Search } from "./styled";
 import { searchPokemon } from "../../api";
 
-export default function SearhBar() {
-    const[search, setSearch] = useState("Ditto")
+export default function SearchBar() {
+    const[search, setSearch] = useState("")
     const[pokemon, setPokemon] = useState()
     
     const changeHandle = (e) => {

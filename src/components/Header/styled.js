@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 export const AreaHeader = styled.div`
     height: 60px;
-    background-color: #38AECC;
+    background-color: #170140;
     color: #fff;
 
     .container{

@@ -1,5 +1,5 @@
 import React from "react";
-import {AreaHeader} from './styled'
+import { AreaHeader } from './styled'
 
 function Header(){
     return(
