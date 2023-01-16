@@ -3,12 +3,12 @@ import FavoriteContext from "../Favorites-Context";
 import { PokedexCard } from "./styled";
 
 const Card = (props) => {
-    const {favoritePokemons, updateFavPokemons} = useContext(FavoriteContext)
+    const {favoritePokemons, updateFavoritePokemons} = useContext(FavoriteContext)
     const { pokemon } =  props;
-
+    
     const onLikeHandle = () => {
         console.log("favoritei")
-        updateFavPokemons(pokemon.name)
+        updateFavoritePokemons(pokemon.name)
     }
  
     const like =  favoritePokemons.includes(pokemon.name) ? "\u2764\uFE0F" : "\uD83D\uDDA4"

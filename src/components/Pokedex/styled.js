@@ -20,5 +20,6 @@ export const PokedexStyled = styled.div`
       align-items: center;
       flex-wrap: wrap;
       gap: 20px;
+      margin-bottom: 80px;
     }
 `;

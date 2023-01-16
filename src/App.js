@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getPokemons, getPokemonsData } from './api';
+import { getPokemons, getPokemonsData, searchPokemon } from './api';
 import './App.css';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -7,14 +7,16 @@ import Search from './components/Search';
 import Pokedex from './components/Pokedex';
 import { FavoriteProvider } from './components/Favorites-Context';
 
+const favoriteKey = "f"
 function App() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [pokemons, setPokemons] = useState([]);
   const [favorites, setFavorites] = useState([])
+  const [notFound, setNotFound] = useState(false);
 
-  const itensPerPage = 25
+  const itensPerPage = 24
   const fetchPokemons = async () => {
     try{
       setLoading(true)
@@ -32,37 +34,69 @@ function App() {
     }
   }
  
+  const loadFavoritePokemons = () => {
+    const pokemons = JSON.parse(window.localStorage.getItem(favoriteKey)) || []
+    setFavorites(pokemons)
+  }
+
+  useEffect(() => {
+    loadFavoritePokemons()
+  }, [])
+
   useEffect(() => {
     console.log("carregou")
     fetchPokemons();
   }, [page])
 
 
-  const updateFavPokemons = (name) => {
-    const updateFav = [...favorites]
-    const favIndex = favorites.indexOf(name)
+  const updateFavoritePokemons = (name) => {
+    const updatedFavorites = [...favorites]
+    const favoriteIndex = favorites.indexOf(name)
 
-    if(favIndex > 0){
-      updateFav.slice(favIndex,1)
+    if(favoriteIndex >= 0){
+      updatedFavorites.splice(favoriteIndex,1)
     } else{
-      updateFav.push(name)
+      updatedFavorites.push(name)
     }
-    setFavorites(updateFav)
+    window.localStorage.setItem(favoriteKey, JSON.stringify(updatedFavorites))
+    setFavorites(updatedFavorites);
   }
 
+  const onSearchHandler = async (pokemon) => {
+    if(!pokemon){
+      return fetchPokemons();
+    } 
+    setLoading(true)
+    setNotFound(false)
+    
+    
+    const result = await searchPokemon(pokemon)
+
+    if(!result){
+      setLoading(false)
+      setNotFound(true)
+    } else {
+      setPokemons([result])
+    }
+    setLoading(false)
+  }
   return (
-    <>
     <FavoriteProvider 
       value={{
         favoritePokemons: favorites,
-        updateFavPokemons: updateFavPokemons,
+        updateFavoritePokemons: updateFavoritePokemons,
       }}
-    />
+    >
+    <>
     <Header />
-    <Search />
-    <Pokedex pokemons={pokemons} loading={loading} page={page} totalPages={totalPages} setPage={setPage} />
+    <Search onSearch={onSearchHandler}/>
+    {notFound ? (
+      <div>Meteu essa?</div>
+    ) : 
+    ( <Pokedex pokemons={pokemons} loading={loading} page={page} totalPages={totalPages} setPage={setPage} />)}
     <Footer />
     </>
+    </FavoriteProvider>
   );
 }
 
