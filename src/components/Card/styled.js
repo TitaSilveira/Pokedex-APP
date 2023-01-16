@@ -6,7 +6,7 @@ export const PokedexCard = styled.div`
     justify-content: center;
     align-items: center;
 
-    padding: 30px;
+    padding: 60px;
     width: 250px;
     height: 200px;
     background-color: #10012C;
@@ -35,8 +35,8 @@ export const PokedexCard = styled.div`
     }
     .card-top{
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
     }
 
@@ -62,7 +62,7 @@ export const PokedexCard = styled.div`
     }
 
     .card-pokemon-type-text{
-        margin-right: 10px;
+        margin-right: 5px;
         text-transform: capitalize;
     }
 
@@ -70,5 +70,7 @@ export const PokedexCard = styled.div`
         padding: 5px 15px;
         border-radius: 5px;
         border: none;
+        margin-top: 15px;
+        cursor: pointer;
     }
 `;

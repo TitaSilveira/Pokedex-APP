@@ -1,6 +1,7 @@
 import styled from "styled-components";
 export const PokedexStyled = styled.div`
-    padding: 10px 50px;
+    display: flex;
+    flex-direction: column;
     color: #F7FFF7;
  
     .pokedex-header {
@@ -9,6 +10,7 @@ export const PokedexStyled = styled.div`
         align-items: center;
         justify-content: space-between;
         margin-bottom: 40px;
+        padding: 0 8em;
     }
 
     .pokedex-flex {

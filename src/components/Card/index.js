@@ -1,14 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
+import FavoriteContext from "../Favorites-Context";
 import { PokedexCard } from "./styled";
 
 const Card = (props) => {
+    const {favoritePokemons, updateFavPokemons} = useContext(FavoriteContext)
     const { pokemon } =  props;
 
     const onLikeHandle = () => {
-        console.log("pode favoritar")
+        console.log("favoritei")
+        updateFavPokemons(pokemon.name)
     }
  
-    const like = "❤"
+    const like =  favoritePokemons.includes(pokemon.name) ? "\u2764\uFE0F" : "\uD83D\uDDA4"
     return(
         <PokedexCard>
             <div className="card-id">
@@ -20,8 +23,6 @@ const Card = (props) => {
             <div className="card-body">
                 <div className="card-top">
                     <h3>{pokemon.name}</h3>
-                </div>
-                <div className="card-botton">
                     <div className="card-pokemon-type">
                         {pokemon.types.map((type, index) => {
                             return(
@@ -29,6 +30,9 @@ const Card = (props) => {
                         )
                         })}
                     </div>
+                </div>
+                <div className="card-botton">
+                    
                     <button className="card-like" onClick={onLikeHandle}>
                         { like }
                     </button>
