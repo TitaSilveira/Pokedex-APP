@@ -3,6 +3,7 @@ import { PokedexStyled } from './styled';
 import Card from '../Card';
 import Pagination from '../Pagination';
 
+
 const Pokedex = (props) => {
 
     const{ pokemons, loading, page, setPage, totalPages } = props;
@@ -31,21 +32,18 @@ const Pokedex = (props) => {
                 />
             </div>
             {
-                loading ? (
-                    <div>Carregando os Pokemons....</div>
-                ) : (
-                    <div className='pokedex-flex'>
-                        {
-                            pokemons && pokemons.map((pokemon, index) => {
-                                return(
-                                    <>
+                <div className='pokedex-flex'>
+                    {
+                        pokemons && pokemons.map((pokemon, index) => {
+                            return(
+                                <>
                                     <Card key={index} pokemon={pokemon} />
-                                    </>
-                                )
-                            })
-                        }
-                    </div>
-                )
+                                </>
+                            )
+                        })
+                     }
+                </div>
+
             }
         </PokedexStyled>
     );

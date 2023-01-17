@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Search from './components/Search';
 import Pokedex from './components/Pokedex';
 import { FavoriteProvider } from './components/Favorites-Context';
+import { ThreeCircles } from  'react-loader-spinner';
 
 const favoriteKey = "f"
 function App() {
@@ -80,6 +81,23 @@ function App() {
     }
     setLoading(false)
   }
+
+  const loader = () => {
+    return(
+      <ThreeCircles
+        height="100"
+        width="100"
+        color="#fac705"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+        ariaLabel="three-circles-rotating"
+        outerCircleColor=""
+        innerCircleColor=""
+        middleCircleColor=""
+      />
+    )
+  }
   return (
     <FavoriteProvider 
       value={{
@@ -90,10 +108,16 @@ function App() {
     <>
     <Header />
     <Search onSearch={onSearchHandler}/>
-    {notFound ? (
-      <div>Meteu essa?</div>
-    ) : 
-    ( <Pokedex pokemons={pokemons} loading={loading} page={page} totalPages={totalPages} setPage={setPage} />)}
+    { loading ? 
+      loader() :
+      notFound ? (
+        <>
+          <div>Meteu essa?</div>
+        </>
+      ) :
+      <Pokedex pokemons={pokemons} page={page} totalPages={totalPages} setPage={setPage} />
+    
+    }
     <Footer />
     </>
     </FavoriteProvider>

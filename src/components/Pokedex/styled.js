@@ -1,4 +1,6 @@
 import styled from "styled-components";
+
+
 export const PokedexStyled = styled.div`
     display: flex;
     flex-direction: column;
@@ -23,3 +25,6 @@ export const PokedexStyled = styled.div`
       margin-bottom: 80px;
     }
 `;
+
+
+ 
