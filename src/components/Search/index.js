@@ -3,7 +3,6 @@ import { Search } from "./styled";
 
 const SearchBar = (props) => {
     const[search, setSearch] = useState("")
-    const[pokemon, setPokemon] = useState()
     const {onSearch} = props;
     
     const changeHandle = (e) => {

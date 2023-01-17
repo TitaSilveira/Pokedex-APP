@@ -84,7 +84,8 @@ function App() {
 
   const loader = () => {
     return(
-      <ThreeCircles
+      <div className="loader">
+        <ThreeCircles
         height="100"
         width="100"
         color="#fac705"
@@ -96,6 +97,8 @@ function App() {
         innerCircleColor=""
         middleCircleColor=""
       />
+      </div>
+      
     )
   }
   return (
@@ -111,9 +114,9 @@ function App() {
     { loading ? 
       loader() :
       notFound ? (
-        <>
+        <div className='not-found'>
           <div>Meteu essa?</div>
-        </>
+        </div>
       ) :
       <Pokedex pokemons={pokemons} page={page} totalPages={totalPages} setPage={setPage} />
     
