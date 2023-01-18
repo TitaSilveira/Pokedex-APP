@@ -8,7 +8,7 @@ const SearchBar = (props) => {
     const changeHandle = (e) => {
         setSearch(e.target.value)
 
-        if(e.target.value === 0) {
+        if(search.length === 0) {
             onSearch(undefined)
         }
     }

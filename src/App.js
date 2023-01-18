@@ -64,12 +64,14 @@ function App() {
   }
 
   const onSearchHandler = async (pokemon) => {
-    if(!pokemon){
+    if (!pokemon){
+      setNotFound(false)
       return fetchPokemons();
-    } 
+    }
     setLoading(true)
-    setNotFound(false)
     
+    
+  
     
     const result = await searchPokemon(pokemon)
 
@@ -115,7 +117,10 @@ function App() {
       loader() :
       notFound ? (
         <div className='not-found'>
-          <div>Meteu essa?</div>
+          <div className="not-found-text">Fera não encontrada, tente novamente.</div>
+          <div className="ash-image">
+            <img src="../../../ash.png" />
+          </div>
         </div>
       ) :
       <Pokedex pokemons={pokemons} page={page} totalPages={totalPages} setPage={setPage} />
