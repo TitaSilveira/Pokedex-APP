@@ -21,7 +21,7 @@ function App() {
 
   const fetchPokemonsData = async () => {
     setLoading(true);
-    pokemonService.getAllPokemons(itensPerPage, itensPerPage * page)
+    await pokemonService.getAllPokemons(itensPerPage, itensPerPage * page)
       .then(async res => {
         const promises = res.results.map(async pokemon => {
           return await pokemonService.getPokemonDetailsByDirectURL(pokemon.url)
@@ -52,6 +52,10 @@ function App() {
     fetchPokemonsData();
   }, [page])
 
+  useEffect(() => {
+    setNotFound(pokemons.length === 0)
+  }, [pokemons]);
+
   const updateFavoritePokemons = (name) => {
     const updatedFavorites = [...favorites]
     const favoriteIndex = favorites.indexOf(name)
@@ -66,19 +70,19 @@ function App() {
   }
 
   const onSearchHandler = async (stringArg = '') => {
-    setLoading(true)
+
     if (stringArg.length === 0) {
-      setPage(0);
+      await fetchPokemonsData();
     } else {
-      pokemonService.getPokemonDetailsByNameOrID(stringArg)
+      setLoading(true)
+      await pokemonService.getPokemonDetailsByNameOrID(stringArg)
         .then(res => {
           setPokemons(res);
-          setNotFound(res.length == 0)
           setTotalPages(Math.ceil(res.length / itensPerPage))
         })
         .catch(err => console.log({ err }))
+      setLoading(false)
     }
-    setLoading(false)
   }
 
   const loadingComponent = () => {
