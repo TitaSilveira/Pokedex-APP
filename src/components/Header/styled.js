@@ -11,10 +11,10 @@ export const AreaHeader = styled.div`
         justify-content: space-between;
        
     }
-    .logo {
+        .logo {
             
-        img{
-            width: 110px;
+            img{
+                width: 110px;
+            }
         }
-    }
 `;

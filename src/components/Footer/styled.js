@@ -5,8 +5,5 @@ export const Areafooter = styled.div`
     padding: 20px;
     font-size: 16px;
     text-align: center;
-    padding-top: 20px;
-    bottom: 0;
     width: 100%;
-    position: fixed;
 `;

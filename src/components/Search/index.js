@@ -1,28 +1,17 @@
 import React, { useState } from "react";
 import { Search } from "./styled";
 
-const SearchBar = (props) => {
-    const[search, setSearch] = useState("")
-    const {onSearch} = props;
-    
-    const changeHandle = (e) => {
-        setSearch(e.target.value)
 
-        if(search.length === 0) {
-            onSearch(undefined)
-        }
-    }
-      
-    const buttonHandle = () => {
-        onSearch(search)
-    }
-    
-    return(
+const SearchBar = (props) => {
+    const { onSearch } = props;
+    const [term, setArgument] = useState();
+
+    return (
         <Search>
-        <div className="search-container">
-            <input placeholder="Digite o Pokemon:" onChange={changeHandle}></input>
-            <button onClick={buttonHandle}>Buscar</button>
-        </div>
+            <div className="search-container">
+                <input placeholder="Digite o Pokemon:" onChange={e => { setArgument(e.target.value) }}></input>
+                <button onClick={() => { onSearch(term) }}>Buscar</button>
+            </div>
         </Search>
     );
 }

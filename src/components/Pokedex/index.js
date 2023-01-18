@@ -3,48 +3,44 @@ import { PokedexStyled } from './styled';
 import Card from '../Card';
 import Pagination from '../Pagination';
 
-
 const Pokedex = (props) => {
 
-    const{ pokemons, loading, page, setPage, totalPages } = props;
-    
+    const { pokemons,  page, setPage, totalPages } = props;
+
     const onLeftClickHandler = () => {
         console.log("voltar")
-        if(page > 0) {
+        if (page > 0) {
             setPage(page - 1)
         }
     }
     const onRightClickHandler = () => {
         console.log("avançar")
-        if(page +1 !== totalPages){
+        if (page + 1 !== totalPages) {
             setPage(page + 1)
         }
     }
-    return(
+    return (
         <PokedexStyled>
             <div className='pokedex-header'>
                 <h1>Pokedex</h1>
-                <Pagination 
+                <Pagination
                     page={page + 1}
                     totalPages={totalPages}
                     onLeftPage={onLeftClickHandler}
                     onRightPage={onRightClickHandler}
                 />
             </div>
-            {
-                <div className='pokedex-flex'>
-                    {
-                        pokemons && pokemons.map((pokemon, index) => {
-                            return(
-                                <>
-                                    <Card key={index} pokemon={pokemon} />
-                                </>
-                            )
-                        })
-                     }
-                </div>
-
-            }
+            <div className='pokedex-flex'>
+                {
+                    pokemons && pokemons.map((pokemon, index) => {
+                        return (
+                            <>
+                                <Card key={index+1} pokemon={pokemon} />
+                            </>
+                        )
+                    })
+                }
+            </div>
         </PokedexStyled>
     );
 }
