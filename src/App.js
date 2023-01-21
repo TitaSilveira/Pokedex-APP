@@ -12,27 +12,28 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [itensPerPage, setitensPerPage] = useState(24);
 
   const [pokemons, setPokemons] = useState([]);
+  const [searchedPokemons, setsearchedPokemons] = useState([]);
   const [favorites, setFavorites] = useState([])
 
   const fetchPokemonsData = async () => {
     setLoading(true);
-    await pokemonService.getAllPokemons(itensPerPage, itensPerPage * page)
+    setsearchedPokemons([]);
+    await pokemonService.getAllPokemons(itensPerPage, itensPerPage * (page - 1))
       .then(async res => {
         const promises = res.results.map(async pokemon => {
           return await pokemonService.getPokemonDetailsByDirectURL(pokemon.url)
         });
 
-        const pokemons = await Promise.all(promises)
+        await Promise.all(promises)
           .then(data => {
             setPokemons(data);
             setTotalPages(Math.ceil(res.count / itensPerPage))
           })
-          .catch(err => console.log({ err }))
       })
       .catch(err => console.log({ err }))
     setLoading(false);
@@ -49,7 +50,11 @@ function App() {
   }, [])
 
   useEffect(() => {
-    fetchPokemonsData();
+    if (searchedPokemons.length !== 0) {
+      setPokemons(searchedPokemons.slice((page - 1) * itensPerPage, page * itensPerPage))
+    } else {
+      fetchPokemonsData();
+    }
   }, [page])
 
   useEffect(() => {
@@ -70,14 +75,15 @@ function App() {
   }
 
   const onSearchHandler = async (stringArg = '') => {
-
     if (stringArg.length === 0) {
       await fetchPokemonsData();
     } else {
       setLoading(true)
       await pokemonService.getPokemonDetailsByNameOrID(stringArg)
         .then(res => {
-          setPokemons(res);
+          setsearchedPokemons(res)
+          setPokemons(res.slice(0, itensPerPage));
+          setPage(1);
           setTotalPages(Math.ceil(res.length / itensPerPage))
         })
         .catch(err => console.log({ err }))

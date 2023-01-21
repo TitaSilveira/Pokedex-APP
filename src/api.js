@@ -21,12 +21,12 @@ export const getPokemonDetailsByDirectURL = async (url) => {
 }
 
 export const getPokemonDetailsByNameOrID = async (arg) => {
-    let pokemon = arg.toLowerCase()
+    let pokemon = arg.toLowerCase();
     try {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`)
         if (response.status === 404) {
-            if (!+arg) { //Se arg n for um número
-                return await getPokemonsWithMatchString(arg)
+            if (!+arg) {
+                return await getPokemonsWithMatchString(pokemon)
                     .then((res) => {
                         return res
                     })
@@ -38,7 +38,6 @@ export const getPokemonDetailsByNameOrID = async (arg) => {
         throw `Erro no getPokemonDetailsByNameOrID => ${error}`
     }
 }
-
 
 export const getPokemonsWithMatchString = async (string) => {
     try {
