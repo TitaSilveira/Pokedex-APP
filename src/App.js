@@ -71,14 +71,14 @@ function App() {
     setLoading(true)
     
     
-  
-    
     const result = await searchPokemon(pokemon)
 
     if(!result){
       setLoading(false)
       setNotFound(true)
     } else {
+      setPage(0)
+      setTotalPages(1)
       setPokemons([result])
     }
     setLoading(false)
